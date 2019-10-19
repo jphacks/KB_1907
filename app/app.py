@@ -51,7 +51,7 @@ def log(log_id):
 
 @app.route('/overview')
 def overview():
-    res = json.dumps(get_overview(), ensure_ascii=False)
+    res = get_overview()
     return render_template("overview.html", res=res)
 
 def allowed_file(filename):
