@@ -95,5 +95,18 @@ def make_response_for_client(result):
             pause = sentences[str(int(k)+1)]['sentence_start'] - sentences[k]['sentence_end']
             pauses["{pre}_{post}".format(pre=k, post=str(int(k)+1))] = pause
     print(pauses)
+    pause_scores = {}
+    splits = len(pause_scores) / 10
+    for k in pauses.keys():
+        pause_score = 1/pauses[k]
+        pause_scores[k] = pause_score
+    for i in range(0,len(pause_scores),splits):
+        sum(pause_scores.values())
+
+
+    print(pause_scores)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
