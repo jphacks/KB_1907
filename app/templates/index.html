@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>RECO INDEX</title>
+    <title>RECO</title>
 
     <link
       rel="stylesheet"
@@ -49,8 +49,8 @@
         </p>
         <hr class="my-4 bg-light" />
         <form action="/upload" method="POST" enctype="multipart/form-data">
-          <input type="file" name="audio" id="audio" />
-          <input type="submit" value="アップロード" onclick="clicked()" />
+          <input type="file" name="audio" id="audio">
+          <input type="submit" value="アップロード" onclick="clicked()">
         </form>
       </div>
       <!-- /.jumbotron -->
@@ -58,8 +58,9 @@
     </div>
     <!-- /.container -->
 
-    <div class="rotating progress" id="progress"></div>
-    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.js"></script>
-    <script src="../static/js/progress.js"></script>
   </body>
+
+  <div class="rotating progress" id="progress"></div>
+  <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.js"></script>
+  <script src="../static/js/progress.js"></script>
 </html>
