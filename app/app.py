@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
 import datetime
 import os
+import json
 
 ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
 UPLOAD_DIR = 'audio_logs'
+LOG_DIR = 'log'
 
 app = Flask(__name__)
 
@@ -24,13 +26,19 @@ def upload():
     else:
         return redirect('/')
 
-@app.route('/log/<int:log_id>')
+@app.route('/log/<log_id>')
 def log(log_id):
-    return render_template("log.html")
+    log_file_path = os.path.join(LOG_DIR, 'log_' + log_id + '.json')
+    with open(log_file_path, 'r') as f:
+        res = json.load(f)
+    return render_template("log.html", res=res)
 
 @app.route('/overview')
 def overview():
-    return render_template("overview.html")
+    log_file_path = os.path.join(LOG_DIR, 'overview.json')
+    with open(log_file_path, 'r') as f:
+        res = json.load(f)
+    return render_template("overview.html", res=res)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
