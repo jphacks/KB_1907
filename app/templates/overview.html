@@ -1,0 +1,93 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>タイトル</title>
+
+
+<link href="../static/css/index.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+    <!-- <nav class="navbar navbar-expand navbar-light" style="background-color: #e3f2fd;"> -->
+   <nav id="navbar-brand" nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">KB_1907</a>
+    </nav> 
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+
+            <div class="container-fluid">
+              <div class="row">
+                <nav class="col-sm-3 col-4" id="myScrollspy">
+                  <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#section1">Section 1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#section2">Section 2</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#section3">Section 3</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Section 4</a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#section41">Link 1</a>
+                        <a class="dropdown-item" href="#section42">Link 2</a>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="col-sm-9 col-8">
+                  <div id="section1" class="bg-success">    
+                    <h1>Section 1</h1>
+                    <div style="position: absolute; top:300px; left:0px;  width:300px; height:300px;" align="left">
+                            <canvas id="my_chart" style="position: relative; height:100; width:150">
+                                    Canvas not supported...
+                            </canvas>
+                  </div>
+                  <div id="section2" class="bg-warning"> 
+                    <h1>Section 2</h1>
+                    <div style="position: absolute; top:300px; left:0px;  width:300px; height:300px;" align="left">
+                            <canvas id="my_chart" style="position: relative; height:100; width:150">
+                                    Canvas not supported...
+                            </canvas>
+                  </div>        
+                  <div id="section3" class="bg-secondary">         
+                    <h1>Section 3</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                  </div>
+                  <div id="section41" class="bg-danger">         
+                    <h1>Section 4-1</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                  </div>      
+                  <div id="section42" class="bg-info">         
+                    <h1>Section 4-2</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            </body>
+
+               
+
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="../static/js/app.js"></script>
+    <div style="position: absolute; top:300px; left:0px;  width:300px; height:300px;" align="left">
+    <canvas id="my_chart" style="position: relative; height:100; width:150">
+            Canvas not supported...
+    </canvas>
+</div> -->
+
+
+</html>
