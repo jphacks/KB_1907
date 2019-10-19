@@ -5,6 +5,8 @@ from janome.tokenizer import Tokenizer
 import json
 import datetime
 import os
+import re
+import collections
 from sklearn import preprocessing
 
 
@@ -12,6 +14,7 @@ ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
 ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一般', '固有名詞']
 UPLOAD_DIR = 'audio_logs'
 LOG_DIR = 'log'
+TOPICS_NUM = 5
 
 app = Flask(__name__)
 t = Tokenizer()
@@ -48,9 +51,7 @@ def log(log_id):
 
 @app.route('/overview')
 def overview():
-    log_file_path = os.path.join(LOG_DIR, 'overview.json')
-    with open(log_file_path, 'r') as f:
-        res = json.load(f)
+    res = json.dumps(get_overview(), ensure_ascii=False)
     return render_template("overview.html", res=res)
 
 def allowed_file(filename):
@@ -170,6 +171,41 @@ def make_response_for_client(result):
 def get_save_path_and_id():
     files = os.listdir(LOG_DIR)
     return os.path.join(LOG_DIR, 'log_' + str(len(files) + 1) + '.json'), str(len(files) + 1)
+
+def get_overview():
+    log_name_list = os.listdir(LOG_DIR)
+    tmp_array = [(re.search("[0-9]+", x).group(), x) for x in log_name_list]
+    tmp_array.sort(key=lambda x:(int(x[0])))
+    log_names = [x[1] for x in tmp_array]
+
+    overview = {}
+    topics = []
+    active_rates = []
+    scores = []
+
+    for log_name in log_names:
+        log_name = os.path.join(LOG_DIR, log_name)
+        with open(log_name, 'r') as f:
+            log = json.load(f)
+        topics.extend(log["topic"])
+        active_rates.append(log["active_rate"])
+        data = log["score"]
+        s = sum(data)
+        N = len(data)
+        mean_score = s / N
+        scores.append(mean_score)
+    c = collections.Counter(topics)
+    for i in range(TOPICS_NUM):
+        if i < len(c.most_common()):
+            topics.append(c.most_common()[i][0])
+        else:
+            break
+
+    overview["topics"] = topics
+    overview["active_rates"] = active_rates
+    overview["scores"] = scores
+    return overview
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
