@@ -12,7 +12,7 @@ var lineData = {
   };
 
 var pieData = {
-  labels: ['talk'],
+  labels: ['conversation','silence'],
   datasets: [{
     data: [122, 53],
     backgroundColor: ['#E86560', '#0064b3']
@@ -20,7 +20,7 @@ var pieData = {
 };
 
 var dominationData = {
-  labels: ['domination',],
+  labels: ['domination','Non-domination'],
   datasets: [{
     data: [60,43],
     backgroundColor: ['#E86560', '#0064b3']
@@ -54,6 +54,10 @@ var lineOptions = {
                 siggestedMax: 100,
                 stepSize: 10,
                 fontColor: "#d0d2ff"
+            },
+            gridLines: {
+              // color: "#d0d2ff"
+              color: "#105E7F"
             }
         }
       ],
@@ -67,6 +71,10 @@ var lineOptions = {
           },
           ticks :{
             fontColor: "#d0d2ff"
+          },
+          gridLines: {
+            // color: "#d0d2ff"
+            color: "#105E7F"
           }
         }
       ]

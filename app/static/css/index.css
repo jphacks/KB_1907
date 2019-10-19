@@ -19,3 +19,28 @@ body {
     height: 250px;
 
   }
+
+
+/* プログレスバー */
+.progress {
+  height: 80px;
+  width: 80px;
+  margin: 50px auto;
+}
+.progress > svg {
+    height: 100%;
+    display: block;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  animation: rotating 2s linear infinite;
+  transform-origin: 50% 50%;
+}
