@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>RECO INDEX</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RECO INDEX</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link href="../static/css/index.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<nav id="navbar-brand" nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><img src="../static/img/brand.gif" width="160px" height="50px" class="d-inline-block align-top" alt="ブランド"></a>
-</nav> 
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link href="../static/css/index.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <nav
+    id="navbar-brand"
+    nav
+    class="navbar navbar-expand-lg navbar-dark bg-dark"
+  >
+    <a class="navbar-brand" href="#"
+      ><img
+        src="../static/img/brand.gif"
+        width="160px"
+        height="50px"
+        class="d-inline-block align-top"
+        alt="ブランド"
+    /></a>
+  </nav>
   <body>
-
-      <div class="container">
-          <div class="jumbotron mt-4 bg-secondary">
-            <h1 class="display-4">
-                <a href="#"><img src="../static/img/logo.gif" width="400px" height="150px" class="d-inline-block align-top" alt="ブランド"></a>
-            </h1>
-            <p class="lead alert alert-info" role="alert">会話データをアップロードしてください</p>
-            <hr class="my-4 bg-light">
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-              <input type="file" name="audio" id="audio">
-              <input type="submit" value="アップロード" onclick="clicked()">
-            </form>
-          </div><!-- /.jumbotron -->
-          ...
-        </div><!-- /.container -->
+    <div class="container">
+      <div class="jumbotron mt-4 bg-secondary">
+        <h1 class="display-4">
+          <a href="#"
+            ><img
+              src="../static/img/logo.gif"
+              width="400px"
+              height="150px"
+              class="d-inline-block align-top"
+              alt="ブランド"
+          /></a>
+        </h1>
+        <p class="lead alert alert-info" role="alert">
+          会話データをアップロードしてください
+        </p>
+        <hr class="my-4 bg-light" />
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <input type="file" name="audio" id="audio" />
+          <input type="submit" value="アップロード" onclick="clicked()" />
+        </form>
+      </div>
+      <!-- /.jumbotron -->
+      ...
+    </div>
+    <!-- /.container -->
 
     <div class="rotating progress" id="progress"></div>
     <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.js"></script>
     <script src="../static/js/progress.js"></script>
+  </body>
 </html>
