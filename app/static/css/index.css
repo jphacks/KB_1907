@@ -9,6 +9,13 @@ body {
   }
   div.col-8 div {
     height: 500px;
-    background-color: #2c3e50;
+
+  }
+  div.col-4 div {
+    height: 250px;
+
+  }
+  div.col-2 div {
+    height: 250px;
 
   }
