@@ -1,14 +1,17 @@
 from flask import Flask, render_template, request, redirect
 from ibm_watson import SpeechToTextV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from janome.tokenizer import Tokenizer
 import json
 import datetime
 import os
 
 ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
+ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一般', '固有名詞']
 UPLOAD_DIR = 'audio_logs'
 
 app = Flask(__name__)
+t = Tokenizer()
 
 @app.route('/')
 def index():
@@ -110,8 +113,26 @@ def make_response_for_client(result):
             area_score += pause_scores[key]
         final_score.append(area_score)
         counter += s
-    print(final_score)
 
+    best_score_index = final_score.index(max(final_score))
+    best_area_num = splits[best_score_index]
+    best_sentence_ids = []
+    id_counter = 0
+    for i in splits[0:best_score_index-1]:
+        id_counter += i
+    for j in range(best_area_num):
+        id_counter += 1
+        best_sentence_ids.append(str(id_counter))
+
+    topic = []
+    for sentence_id in best_sentence_ids:
+        sentence_body = sentences[sentence_id]["body"]
+        sentence_body = sentence_body.replace(" ", "")
+        for token in t.tokenize(sentence_body):
+            part_of_speech = token.part_of_speech.split(',')
+            if part_of_speech[0] == "名詞" and part_of_speech[1] in ALLOWED_NOUN_KIND:
+                topic.append(token.surface)
+    print(topic)
 
 
 if __name__ == "__main__":
