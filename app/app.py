@@ -30,9 +30,8 @@ def upload():
         audio_path = os.path.join(UPLOAD_DIR, saveFileName)
         audio.save(audio_path)
         result = post_audio_to_speech_to_textAPI(audio_path)
-        possession = calc_posession(result)
         make_response_for_client(result)
-        return possession
+        return result
     else:
         return redirect('/')
 
@@ -65,10 +64,20 @@ def post_audio_to_speech_to_textAPI(filename):
             ).get_result()
         return speech_recognition_results
 
-def calc_posession(result):
-    speaker_labels = result['speaker_labels']
-    total_time = 0
+def make_response_for_client(result):
+    sentences = {}
+    pauses = {}
+    pause_scores = {}
     posession_per_speaker = {}
+    final_score = []
+    best_sentence_ids = []
+    topic = []
+    active_rate = 0
+    total_pause = 0
+    total_time = 0
+    sentence_counter = 0
+
+    speaker_labels = result['speaker_labels']
     for label in speaker_labels:
         start = float(label['from'])
         end = float(label['to'])
@@ -83,11 +92,7 @@ def calc_posession(result):
         time = posession_per_speaker[speaker_id]
         posession = time / total_time
         posession_per_speaker[speaker_id] = posession
-    return posession_per_speaker
 
-def make_response_for_client(result):
-    sentences = {}
-    sentence_counter = 0
     for x in result['results']:
         for y in x['alternatives']:
             sentence_id = str(sentence_counter)
@@ -96,12 +101,13 @@ def make_response_for_client(result):
             sentences[sentence_id]["sentence_end"] = y['timestamps'][-1][2]
             sentences[sentence_id]["body"] = y["transcript"]
             sentence_counter += 1
-    pauses = {}
+
     for k in sentences.keys():
         if k != str(len(sentences) - 1):
             pause = sentences[str(int(k)+1)]['sentence_start'] - sentences[k]['sentence_end']
             pauses["{pre}_{post}".format(pre=k, post=str(int(k)+1))] = pause
-    pause_scores = {}
+            total_pause += pause
+
     splits = [(len(pauses) + i) // 10 for i in range(10)]
     for k in pauses.keys():
         pause_score = 1/pauses[k]
@@ -116,17 +122,14 @@ def make_response_for_client(result):
         non_final_score.append(area_score)
         counter += s
     final_score = []
-    print(non_final_score)
     for i in non_final_score:
         final = i / splits[0]
         final_score.append(final)
-    print(final_score)
-    
+
     final_score = preprocessing.minmax_scale(final_score)
     final_score = final_score.tolist()
     best_score_index = final_score.index(max(final_score))
     best_area_num = splits[best_score_index]
-    best_sentence_ids = []
     id_counter = 0
     for i in splits[0:best_score_index-1]:
         id_counter += i
@@ -134,7 +137,6 @@ def make_response_for_client(result):
         id_counter += 1
         best_sentence_ids.append(str(id_counter))
 
-    topic = []
     for sentence_id in best_sentence_ids:
         sentence_body = sentences[sentence_id]["body"]
         sentence_body = sentence_body.replace(" ", "")
@@ -142,8 +144,8 @@ def make_response_for_client(result):
             part_of_speech = token.part_of_speech.split(',')
             if part_of_speech[0] == "名詞" and part_of_speech[1] in ALLOWED_NOUN_KIND:
                 topic.append(token.surface)
-    print(topic)
 
+    active_rate = 1 - (total_pause / total_time)
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
