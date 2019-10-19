@@ -2,10 +2,10 @@
 // };
 // console.log(jsonData);
 // console.log(typeof(jsonData));
-var json = document.getElementById("json").value;
+var json = document.getElementById("json-data").textContent;
 // json = json.slice(1);
 // json = json.slice(0, -1);
-console.log(json);
+// console.log(json);
 json = JSON.stringify(json);
 var obj = JSON.parse(json);
 
