@@ -104,8 +104,13 @@ def make_response_for_client(result):
         time = posession_per_speaker[speaker_id]
         posession = time / total_time
         posession_per_speaker[speaker_id] = posession
-    weight = 1 - abs(posession_per_speaker["0"] - posession_per_speaker["1"]) 
-    print(weight)
+
+    if len(posession_per_speaker) == 2:
+        speaker_ids = list(posession_per_speaker.keys())
+        weight = 1 - abs(posession_per_speaker[speaker_ids[0]] - posession_per_speaker[speaker_ids[1]])
+    else:
+        weight = 1
+        posession_per_speaker = {"0": 0, "1": 0}
 
     for x in result['results']:
         for y in x['alternatives']:
@@ -150,7 +155,6 @@ def make_response_for_client(result):
     for score in final_score:
         weighted_final = score * weight
         weighted_final_score.append(weighted_final)
-    print(weighted_final_score)
     best_score_index = weighted_final_score.index(max(weighted_final_score))
     best_area_num = splits[best_score_index]
     id_counter = 0
