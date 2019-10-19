@@ -5,6 +5,8 @@ from janome.tokenizer import Tokenizer
 import json
 import datetime
 import os
+from sklearn import preprocessing
+
 
 ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
 ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一般', '固有名詞']
@@ -104,16 +106,24 @@ def make_response_for_client(result):
     for k in pauses.keys():
         pause_score = 1/pauses[k]
         pause_scores[k] = pause_score
-    final_score = []
+    non_final_score = []
     counter = 0
     for s in splits:
         area_score = 0
         for i in range(0, s):
             key = str(counter + i) + '_' + str(counter + i + 1)
             area_score += pause_scores[key]
-        final_score.append(area_score)
+        non_final_score.append(area_score)
         counter += s
-
+    final_score = []
+    print(non_final_score)
+    for i in non_final_score:
+        final = i / splits[0]
+        final_score.append(final)
+    print(final_score)
+    
+    final_score = preprocessing.minmax_scale(final_score)
+    final_score = final_score.tolist()
     best_score_index = final_score.index(max(final_score))
     best_area_num = splits[best_score_index]
     best_sentence_ids = []
