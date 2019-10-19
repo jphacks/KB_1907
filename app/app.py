@@ -5,6 +5,8 @@ from janome.tokenizer import Tokenizer
 import json
 import datetime
 import os
+import re
+import collections
 from sklearn import preprocessing
 
 
@@ -12,6 +14,7 @@ ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
 ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一般', '固有名詞']
 UPLOAD_DIR = 'audio_logs'
 LOG_DIR = 'log'
+TOPICS_NUM = 5
 
 app = Flask(__name__)
 t = Tokenizer()
@@ -48,9 +51,7 @@ def log(log_id):
 
 @app.route('/overview')
 def overview():
-    log_file_path = os.path.join(LOG_DIR, 'overview.json')
-    with open(log_file_path, 'r') as f:
-        res = json.load(f)
+    res = json.dumps(get_overview(), ensure_ascii=False)
     return render_template("overview.html", res=res)
 
 def allowed_file(filename):
@@ -103,6 +104,8 @@ def make_response_for_client(result):
         time = posession_per_speaker[speaker_id]
         posession = time / total_time
         posession_per_speaker[speaker_id] = posession
+    weight = 1 - abs(posession_per_speaker["0"] - posession_per_speaker["1"]) 
+    print(weight)
 
     for x in result['results']:
         for y in x['alternatives']:
@@ -139,9 +142,16 @@ def make_response_for_client(result):
             final_score.append(final)
         else:
             final_score.append(0)
+    """
     final_score = preprocessing.minmax_scale(final_score)
     final_score = final_score.tolist()
-    best_score_index = final_score.index(max(final_score))
+    """
+    weighted_final_score = []
+    for score in final_score:
+        weighted_final = score * weight
+        weighted_final_score.append(weighted_final)
+    print(weighted_final_score)
+    best_score_index = weighted_final_score.index(max(weighted_final_score))
     best_area_num = splits[best_score_index]
     id_counter = 0
     for i in splits[0:best_score_index-1]:
@@ -163,13 +173,48 @@ def make_response_for_client(result):
     response["topic"] = topic
     response["possesion"] = posession_per_speaker
     response["active_rate"] = active_rate
-    response["score"] = final_score
+    response["score"] = weighted_final_score
 
     return response
 
 def get_save_path_and_id():
     files = os.listdir(LOG_DIR)
     return os.path.join(LOG_DIR, 'log_' + str(len(files) + 1) + '.json'), str(len(files) + 1)
+
+def get_overview():
+    log_name_list = os.listdir(LOG_DIR)
+    tmp_array = [(re.search("[0-9]+", x).group(), x) for x in log_name_list]
+    tmp_array.sort(key=lambda x:(int(x[0])))
+    log_names = [x[1] for x in tmp_array]
+
+    overview = {}
+    topics = []
+    top_topics = []
+    active_rates = []
+    scores = []
+
+    for log_name in log_names:
+        log_name = os.path.join(LOG_DIR, log_name)
+        with open(log_name, 'r') as f:
+            log = json.load(f)
+        topics.extend(log["topic"])
+        active_rates.append(log["active_rate"])
+        data = log["score"]
+        s = sum(data)
+        N = len(data)
+        mean_score = s / N
+        scores.append(mean_score)
+    c = collections.Counter(topics)
+    for i in range(TOPICS_NUM):
+        if i < len(c.most_common()):
+            top_topics.append(c.most_common()[i][0])
+        else:
+            break
+
+    overview["topics"] = top_topics
+    overview["active_rates"] = active_rates
+    overview["scores"] = scores
+    return overview
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
