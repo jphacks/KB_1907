@@ -1,10 +1,10 @@
 
 // ダミーデータ
 var lineData = {
-    labels: [1, 2, 3, 4],
+    labels: [1, 2, 3, 4, 5, 6, 7],
     datasets: [{
       label: '',
-      data: [60, 77, 45, 88],
+      data: [60, 77, 45, 88, 55, 49, 80],
       borderColor: '#E86560',
       fill: false,
       // backgroundColor: '#E86560',
@@ -29,9 +29,16 @@ var dominationData = {
 
 //データの取得
 
-// var data = document.getElementById("");
+/*
+ var inputData = document.getElementById("");
+ var obj = JSON.parse(inputData);
+ var posession = obj.posession;
+ var topic = obj.topic;
+ var active_percent = obj.active_percent;
+ var scores = obj.score
+*/
 
-var options = {
+var lineOptions = {
     scales: {
         yAxes: [
           {
@@ -39,15 +46,14 @@ var options = {
               display: true,
               labelString: "Score",              
               fontSize: 14,
-              fontColor: "#d0d2ff",
-              
+              fontColor: "#d0d2ff"
 
             },
             ticks: {
                 suggestedMin: 0, 
                 siggestedMax: 100,
                 stepSize: 10,
-                fontColor: "#d0d2ff",
+                fontColor: "#d0d2ff"
             },
             gridLines: {
               // color: "#d0d2ff"
@@ -59,13 +65,12 @@ var options = {
         {
           scaleLabel: {
             display: true,
-            labelString: "ID",
+            labelString: "Time",
             fontsize: 14,
             fontColor: "#d0d2ff"
           },
           ticks :{
-            fontColor: "#d0d2ff",
-           
+            fontColor: "#d0d2ff"
           },
           gridLines: {
             // color: "#d0d2ff"
@@ -77,12 +82,15 @@ var options = {
     },
     title : {
         display: true,
-        text: "overview",
+        text: "Conversation Log",
         fontSize: 20,
         fontColor: "#d0d2ff"
     },
     legend: {
         display: false
+    },
+    tooltips: {
+        mode: 'point'
     }
 };
 
@@ -90,7 +98,7 @@ var line = document.getElementById("line");
 var lineChart = new Chart(line, {
     type: 'line',
     data: lineData,
-    options: options
+    options: lineOptions
 });
 
 var space = document.getElementById("space");
