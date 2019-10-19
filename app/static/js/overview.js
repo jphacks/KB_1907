@@ -1,30 +1,75 @@
 
-
+// ダミーデータ
 var lineData = {
     labels: [1, 2, 3, 4],
     datasets: [{
       label: '',
       data: [60, 77, 45, 88],
-      // borderColor: 'rgb(0,139,52)',
-      borderColor: 'skyblue',
+      borderColor: '#E86560',
       fill: false,
+      // backgroundColor: '#E86560',
     }]
   };
 
+var pieData = {
+  labels: ['talk'],
+  datasets: [{
+    data: [122, 53],
+    backgroundColor: ['#E86560', '#0064b3']
+  }]
+};
+
+var dominationData = {
+  labels: ['domination',],
+  datasets: [{
+    data: [60,43],
+    backgroundColor: ['#E86560', '#0064b3']
+  }]
+};
+
+//データの取得
+
+// var data = document.getElementById("");
+
 var options = {
     scales: {
-        yAxis: [{
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Score",              
+              fontSize: 14,
+              fontColor: "#d0d2ff"
+
+            },
             ticks: {
                 suggestedMin: 0, 
                 siggestedMax: 100,
                 stepSize: 10,
+                fontColor: "#d0d2ff"
             }
-        }]
+        }
+      ],
+      xAxes: [
+        {
+          scaleLabel: {
+            display: true,
+            labelString: "ID",
+            fontsize: 14,
+            fontColor: "#d0d2ff"
+          },
+          ticks :{
+            fontColor: "#d0d2ff"
+          }
+        }
+      ]
+  
     },
     title : {
         display: true,
         text: "overview",
-        fontSize: 18
+        fontSize: 20,
+        fontColor: "#d0d2ff"
     },
     legend: {
         display: false
@@ -38,39 +83,41 @@ var lineChart = new Chart(line, {
     options: options
 });
 
-var pieData = {
-    labels: ['talk', 'silence'],
-    datasets: [{
-      data: [122, 53],
-      // backgroundColor: ['rgb(0,139,52)', 'rgb(255,228,168)']
-      backgroundColor: ['tomato', 'skyblue']
-    }]
-  };
-
 var space = document.getElementById("space");
 var spaceChart = new Chart(space, {
     type: 'doughnut',
     data: pieData,
     options: {
         cutoutPercentage: 40,
-        responsive: true
+        responsive: true,
+        title: {
+          display: true,
+          fontSize: 20,
+          text: "Conversation Rate",
+          fontColor: "#d0d2ff"
+        },
+        legend: {
+          display: false
+        }
     }
 });
-
-var dominationData = {
-    labels: ['domination',],
-    datasets: [{
-      data: [60,43],
-      backgroundColor: ['tomato', 'skyblue']
-    }]
-  };
 
 var domination = document.getElementById("domination");
 var domination = new Chart(domination, {
     type: 'doughnut',
     data: dominationData,
     options: {
-        cutoutPercentage: 40
+        cutoutPercentage: 40,
+        title : {
+          display: true,
+          fontSize: 20,
+          text: "Domination Rate",
+          fontColor: "#d0d2ff"
+        },
+        legend: {
+          display: false
+          // fontColor: "#d0d2ff",
+        }
     }
 });
 
