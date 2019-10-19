@@ -32,7 +32,10 @@ def upload():
         audio.save(audio_path)
         result = post_audio_to_speech_to_textAPI(audio_path)
         response = make_response_for_client(result)
-        return response
+        save_path, json_id = get_save_path_and_id()
+        with open(save_path, 'w') as f:
+            json.dump(response, f, ensure_ascii=False)
+        return redirect('/log/{json_id}'.format(json_id=json_id))
     else:
         return redirect('/')
 
@@ -130,10 +133,12 @@ def make_response_for_client(result):
         non_final_score.append(area_score)
         counter += s
     final_score = []
-    for i in non_final_score:
-        final = i / splits[0]
-        final_score.append(final)
-
+    for i, score in enumerate(non_final_score):
+        if splits[i] != 0:
+            final = score / splits[i]
+            final_score.append(final)
+        else:
+            final_score.append(0)
     final_score = preprocessing.minmax_scale(final_score)
     final_score = final_score.tolist()
     best_score_index = final_score.index(max(final_score))
@@ -161,6 +166,10 @@ def make_response_for_client(result):
     response["score"] = final_score
 
     return response
+
+def get_save_path_and_id():
+    files = os.listdir(LOG_DIR)
+    return os.path.join(LOG_DIR, 'log_' + str(len(files) + 1) + '.json'), str(len(files) + 1)
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
