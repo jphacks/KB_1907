@@ -104,6 +104,8 @@ def make_response_for_client(result):
         time = posession_per_speaker[speaker_id]
         posession = time / total_time
         posession_per_speaker[speaker_id] = posession
+    weight = 1 - abs(posession_per_speaker["0"] - posession_per_speaker["1"]) 
+    print(weight)
 
     for x in result['results']:
         for y in x['alternatives']:
@@ -140,9 +142,16 @@ def make_response_for_client(result):
             final_score.append(final)
         else:
             final_score.append(0)
+    """
     final_score = preprocessing.minmax_scale(final_score)
     final_score = final_score.tolist()
-    best_score_index = final_score.index(max(final_score))
+    """
+    weighted_final_score = []
+    for score in final_score:
+        weighted_final = score * weight
+        weighted_final_score.append(weighted_final)
+    print(weighted_final_score)
+    best_score_index = weighted_final_score.index(max(weighted_final_score))
     best_area_num = splits[best_score_index]
     id_counter = 0
     for i in splits[0:best_score_index-1]:
@@ -164,7 +173,7 @@ def make_response_for_client(result):
     response["topic"] = topic
     response["possesion"] = posession_per_speaker
     response["active_rate"] = active_rate
-    response["score"] = final_score
+    response["score"] = weighted_final_score
 
     return response
 
