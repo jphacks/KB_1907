@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from ibm_watson import SpeechToTextV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+import json
 import datetime
 import os
 
@@ -23,7 +24,8 @@ def upload():
         saveFileName = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.' + audio.filename.rsplit('.', 1)[1].lower()
         audio_path = os.path.join(UPLOAD_DIR, saveFileName)
         audio.save(audio_path)
-        post_audio_to_speech_to_textAPI(audio_path)
+        result = post_audio_to_speech_to_textAPI(audio_path)
+        
     else:
         return redirect('/')
 
@@ -54,21 +56,7 @@ def post_audio_to_speech_to_textAPI(filename):
                 timestamps=True,
                 speaker_labels=True,
             ).get_result()
-
-        t = str(json.dumps(speech_recognition_results,
-                           indent=2, ensure_ascii=False))
-
-        with open('sound.json', 'w', encoding='utf-8') as f:
-            f.write(t)
-
-        """
-        #print(json.dumps(profile, indent=2))
-        for x in profile['personality']:
-            print(x['trait_id'], x['percentile'])
-        """
-        for x in speech_recognition_results['results']:
-            print(x['alternatives'], x[''])
-
+        return speech_recognition_results
 
 
 if __name__ == "__main__":
