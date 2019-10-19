@@ -1,112 +1,115 @@
 <!-- templates/overview.html -->
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>RECO result</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RECO result</title>
 
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link href="../static/css/index.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-    <!-- <nav class="navbar navbar-expand navbar-light" style="background-color: #e3f2fd;"> -->
-   <nav id="navbar-brand" nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">RECO</a>
-    </nav> 
-    <body data-spy="scroll" data-target="#myScrollspy" data-offset="1"　style="background-color: #2c3e50;">
-
-            <div class="container-fluid">
-              <div class="row">
-                <nav class="col-sm-3 col-4" id="myScrollspy">
-                  <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#section1">Chart</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#section2">Rate</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#section3">Hot Topic</a>
-                    </li>
-
-                  </ul>
-                </nav>
-             <div class="col-sm-9 col-8">
-                  <div id="section1">    
-                    <canvas id="line"></canvas>
-                    <div style=" width:300px; height:300px;"></div>
-                  </div>
-            </div>
-            <div class="col-sm-3 col-4"></div>
-                <div class="col-4">
-                  <div id="section2"> 
-                      <canvas id="space"></canvas>
-                      <div style=" width:300px; height:300px;"></div>
-                  </div>
-                
-                </div> 
-                <div class="col-4">      
-                  <div id="section2">         
-                      <canvas id="domination"></canvas>
-                      <div style=" width:300px; height:300px;"></div>
-                  </div>
-                              
-                  </div> 
-
-                  <div class="col-sm-3 col-4"></div>
-                  <div class="col-sm-1"></div>
-                <div class="col-sm-2">
-                    <div id="section3">    
-                        <div class="card-deck"></div>
-                        <div class="card text-white bg-info mb-3">
-                                <div class="card-header">Top Topic</div>
-                                <div class="card-body">
-                                  <p class="card-text">arigato</p>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-2">
-                                <div id="section3">    
-
-                                <div class="card text-white bg-info mb-3">
-                                 <div class="card-header">Top Topic</div>
-                                 <div class="card-body">
-                                     <p class="card-text">nemui</p>
-                                </div>
-                         </div>
-                        </div>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <div id="section3">    
-                                <div class="card text-white bg-info mb-3">
-                                <div class="card-header">Top Topic</div>
-                                <div class="card-body">
-                                    <p class="card-text">nemui</p>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-              
-            </div>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link href="../static/css/index.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <!-- <nav class="navbar navbar-expand navbar-light" style="background-color: #e3f2fd;"> -->
+  <nav
+    id="navbar-brand"
+    nav
+    class="navbar navbar-expand-lg navbar-dark bg-dark"
+  >
+    <a class="navbar-brand" href="#">RECO</a>
+  </nav>
+  <body
+    data-spy="scroll"
+    data-target="#myScrollspy"
+    data-offset="1"
+    　style="background-color: #2c3e50;"
+  >
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-4" id="myScrollspy">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#section1">Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section2">Rate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section3">Hot Topic</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="col-sm-9 col-8">
+          <div id="section1">
+            <canvas id="line"></canvas>
+            <div style=" width:300px; height:300px;"></div>
+          </div>
         </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-            <script src="../static/js/overview.js"></script>
-            </body>
+        <div class="col-sm-3 col-4"></div>
+        <div class="col-4">
+          <div id="section2">
+            <canvas id="space"></canvas>
+            <div style=" width:300px; height:300px;"></div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div id="section2">
+            <canvas id="domination"></canvas>
+            <div style=" width:300px; height:300px;"></div>
+          </div>
+        </div>
 
-               
+        <div class="col-sm-3 col-4"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+          <div id="section3">
+            <div class="card-deck"></div>
+            <div class="card text-white bg-info mb-3">
+              <div class="card-header">Top Topic</div>
+              <div class="card-body">
+                <p class="card-text">arigato</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-sm-2">
+          <div id="section3">
+            <div class="card text-white bg-info mb-3">
+              <div class="card-header">Top Topic</div>
+              <div class="card-body">
+                <p class="card-text">nemui</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+        <div class="col-sm-2">
+          <div id="section3">
+            <div class="card text-white bg-info mb-3">
+              <div class="card-header">Top Topic</div>
+              <div class="card-body">
+                <p class="card-text">nemui</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" value="{{ res }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="../static/js/overview.js"></script>
+  </body>
+
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="../static/js/app.js"></script>
     <div style="position: absolute; top:300px; left:0px;  width:300px; height:300px;" align="left">
@@ -114,6 +117,4 @@
             Canvas not supported...
     </canvas>
 </div> -->
-
-
 </html>
