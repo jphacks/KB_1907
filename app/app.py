@@ -30,8 +30,8 @@ def upload():
         audio_path = os.path.join(UPLOAD_DIR, saveFileName)
         audio.save(audio_path)
         result = post_audio_to_speech_to_textAPI(audio_path)
-        make_response_for_client(result)
-        return result
+        response = make_response_for_client(result)
+        return response
     else:
         return redirect('/')
 
@@ -65,6 +65,7 @@ def post_audio_to_speech_to_textAPI(filename):
         return speech_recognition_results
 
 def make_response_for_client(result):
+    response = {}
     sentences = {}
     pauses = {}
     pause_scores = {}
@@ -146,6 +147,13 @@ def make_response_for_client(result):
                 topic.append(token.surface)
 
     active_rate = 1 - (total_pause / total_time)
+
+    response["topic"] = topic
+    response["possesion"] = posession_per_speaker
+    response["active_rate"] = active_rate
+    response["score"] = final_score
+
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)

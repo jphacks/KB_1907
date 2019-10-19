@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 ibm-watson = "*"
 janome = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.7"
