@@ -96,17 +96,21 @@ def make_response_for_client(result):
         if k != str(len(sentences) - 1):
             pause = sentences[str(int(k)+1)]['sentence_start'] - sentences[k]['sentence_end']
             pauses["{pre}_{post}".format(pre=k, post=str(int(k)+1))] = pause
-    print(pauses)
     pause_scores = {}
-    splits = len(pause_scores) / 10
+    splits = [(len(pauses) + i) // 10 for i in range(10)]
     for k in pauses.keys():
         pause_score = 1/pauses[k]
         pause_scores[k] = pause_score
-    for i in range(0,len(pause_scores),splits):
-        sum(pause_scores.values())
-
-
-    print(pause_scores)
+    final_score = []
+    counter = 0
+    for s in splits:
+        area_score = 0
+        for i in range(0, s):
+            key = str(counter + i) + '_' + str(counter + i + 1)
+            area_score += pause_scores[key]
+        final_score.append(area_score)
+        counter += s
+    print(final_score)
 
 
 
