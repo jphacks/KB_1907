@@ -26,6 +26,7 @@ def upload():
         audio.save(audio_path)
         result = post_audio_to_speech_to_textAPI(audio_path)
         possession = calc_posession(result)
+        make_response_for_client(result)
         return possession
     else:
         return redirect('/')
@@ -79,5 +80,20 @@ def calc_posession(result):
         posession_per_speaker[speaker_id] = posession
     return posession_per_speaker
 
+def make_response_for_client(result):
+    sentences = {}
+    sentence_counter = 0
+    for x in result['results']:
+        for y in x['alternatives']:
+            sentences[str(sentence_counter)] = {}
+            sentences[str(sentence_counter)]["sentence_start"] = y['timestamps'][0][1]
+            sentences[str(sentence_counter)]["sentence_end"] = y['timestamps'][-1][2]
+            sentence_counter += 1
+    pauses = {}
+    for k in sentences.keys():
+        if k != str(len(sentences) - 1):
+            pause = sentences[str(int(k)+1)]['sentence_start'] - sentences[k]['sentence_end']
+            pauses["{pre}_{post}".format(pre=k, post=str(int(k)+1))] = pause
+    print(pauses)
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
