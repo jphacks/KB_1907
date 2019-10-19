@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+ibm-watson = "*"
+janome = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.7"
