@@ -25,7 +25,8 @@ def upload():
         audio_path = os.path.join(UPLOAD_DIR, saveFileName)
         audio.save(audio_path)
         result = post_audio_to_speech_to_textAPI(audio_path)
-        
+        possession = calc_posession(result)
+        return possession
     else:
         return redirect('/')
 
@@ -58,6 +59,25 @@ def post_audio_to_speech_to_textAPI(filename):
             ).get_result()
         return speech_recognition_results
 
+def calc_posession(result):
+    speaker_labels = result['speaker_labels']
+    total_time = 0
+    posession_per_speaker = {}
+    for label in speaker_labels:
+        start = float(label['from'])
+        end = float(label['to'])
+        speak_time = end - start
+        speaker_id = str(label['speaker'])
+        if speaker_id in posession_per_speaker:
+            posession_per_speaker[speaker_id] += speak_time
+        else:
+            posession_per_speaker[speaker_id] = speak_time
+        total_time += speak_time
+    for speaker_id in posession_per_speaker.keys():
+        time = posession_per_speaker[speaker_id]
+        posession = time / total_time
+        posession_per_speaker[speaker_id] = posession
+    return posession_per_speaker
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
