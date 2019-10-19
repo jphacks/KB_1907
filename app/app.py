@@ -85,9 +85,11 @@ def make_response_for_client(result):
     sentence_counter = 0
     for x in result['results']:
         for y in x['alternatives']:
-            sentences[str(sentence_counter)] = {}
-            sentences[str(sentence_counter)]["sentence_start"] = y['timestamps'][0][1]
-            sentences[str(sentence_counter)]["sentence_end"] = y['timestamps'][-1][2]
+            sentence_id = str(sentence_counter)
+            sentences[sentence_id] = {}
+            sentences[sentence_id]["sentence_start"] = y['timestamps'][0][1]
+            sentences[sentence_id]["sentence_end"] = y['timestamps'][-1][2]
+            sentences[sentence_id]["body"] = y["transcript"]
             sentence_counter += 1
     pauses = {}
     for k in sentences.keys():
