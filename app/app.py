@@ -180,6 +180,7 @@ def get_overview():
 
     overview = {}
     topics = []
+    top_topics = []
     active_rates = []
     scores = []
 
@@ -197,15 +198,14 @@ def get_overview():
     c = collections.Counter(topics)
     for i in range(TOPICS_NUM):
         if i < len(c.most_common()):
-            topics.append(c.most_common()[i][0])
+            top_topics.append(c.most_common()[i][0])
         else:
             break
 
-    overview["topics"] = topics
+    overview["topics"] = top_topics
     overview["active_rates"] = active_rates
     overview["scores"] = scores
     return overview
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
