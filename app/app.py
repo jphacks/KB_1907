@@ -14,7 +14,7 @@ ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一�
 UPLOAD_DIR = 'audio_logs'
 LOG_DIR = 'log'
 TOPICS_NUM = 5
-DEBUG_MODE = True
+DEBUG_MODE = False
 DEBUG_DATA_PATH = 'test_data/sound.json'
 
 app = Flask(__name__)
@@ -132,8 +132,11 @@ def make_response_for_client(result):
             pause = sentences[str(int(k)+1)]['sentence_start'] - sentences[k]['sentence_end']
             pauses["{pre}_{post}".format(pre=k, post=str(int(k)+1))] = pause
             total_pause += pause
-
-    splits = [(len(pauses) + i) // 10 for i in range(10)]
+    if len(sentences) < 10:
+        split_num = len(sentences) - 1
+    else:
+        split_num = 10
+    splits = [(len(pauses) + i) // split_num for i in range(split_num)]
     for k in pauses.keys():
         pause_score = 1/pauses[k]
         pause_scores[k] = pause_score
