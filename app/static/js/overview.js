@@ -50,8 +50,6 @@ var pieData = {
   }]
 };
 
-
-
 //データの取得
 
 var options = {
