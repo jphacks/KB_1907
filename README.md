@@ -34,7 +34,7 @@
 ## 開発内容・開発技術
 ### 活用した技術
 
-![formation](https://user-images.githubusercontent.com/25533384/67153558-7cd2b000-f326-11e9-9fab-32432d1f158f.png)
+<img src="https://user-images.githubusercontent.com/25533384/67153558-7cd2b000-f326-11e9-9fab-32432d1f158f.png" width="320px">
 
 #### API・データ
 * IBM Speech-To-Text API
