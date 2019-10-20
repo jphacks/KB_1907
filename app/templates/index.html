@@ -32,13 +32,12 @@
     /></a>
   </nav>
   <body>
-    
     <div class="container">
       <div class="jumbotron mt-4">
         <div class="bg-mask">
-
-        <h1 class="display-4"><font face="Arial Rounded MT Bold">Let's ReCo!</font><br/>
-          <!-- <a href="#"
+          <h1 class="display-4">
+            <font face="Arial Rounded MT Bold">Let's ReCo!</font><br />
+            <!-- <a href="#"
             ><img
               src="../static/img/logo.gif"
               width="400px"
@@ -46,19 +45,19 @@
               class="d-inline-block align-top"
               alt="ブランド"
           /></a> -->
-        </h1>
-        <p class="lead"><font face="YuGothic">
-          </br>
-          会話データをアップロードし、自分のコミュニケーションを可視化させよう！</br>
-          会話のログを見て、自分のコミュニケーションスキルアップに活用してみてください。</br>
-          対応ファイル形式は、.mp3と.wavです。</br>
-          </font>
-        </p>
+          </h1>
+          <p class="lead">
+            <font face="YuGothic">
+              会話データをアップロードし、自分のコミュニケーションを可視化させよう！<br />
+              会話のログを見て、自分のコミュニケーションスキルアップに活用してみてください。<br />
+              対応ファイル形式は、.mp3と.wavです。<br />
+            </font>
+          </p>
+        </div>
       </div>
     </div>
-    </div>
-     <div class="container">
-    <!-- <h1><a href="#"
+    <div class="container">
+      <!-- <h1><a href="#"
     ><img
       src="../static/img/logo.gif"
       width="400px"
@@ -66,20 +65,22 @@
       class="d-inline-block align-top"
       alt="ブランド"
   /></a></h1> -->
-        <hr class="my-4 bg-light" />
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-        <form action="/upload" method="POST" enctype="multipart/form-data" >
-          <input type="file" name="audio" id="audio" class="button2">
-          <input type="submit" value="アップロード" onclick="clicked()" class="button">
+      <hr class="my-4 bg-light" />
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <input type="file" name="audio" id="audio" class="button2" />
+          <input
+            type="submit"
+            value="アップロード"
+            onclick="clicked()"
+            class="button"
+          />
         </form>
-        </div>
+      </div>
     </div>
-      <!-- /.jumbotron -->
-      ...
-    </div>
+    <!-- /.jumbotron -->
     <!-- /.container -->
-
   </body>
 
   <div class="rotating progress" id="progress"></div>
