@@ -2,7 +2,7 @@
 
 <img width="1355" alt="top_logo" src="https://user-images.githubusercontent.com/40557348/67154715-26706c00-f33c-11e9-88f7-f59830638304.png">
 
-[![ReCo](image.png)](https://www.youtube.com/watch?v=G5rULR53uMk)
+[![ReCo](image.png)](https://www.youtube.com/embed/IUudbtRc7Sk)
 
 ## 製品概要
 ### 会話 Tech
