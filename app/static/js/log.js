@@ -1,19 +1,10 @@
-// var jsonData = {'topic': ['サラリーマン', '史上', '最長'], 'possesion': {'2': 0.40429419826404744, '1': 0.5957058017359526}, 'active_rate': 0.6541799908634081, 'score': [0.25399028452463523, 0.14656488549618274, 0.1289607232717812, 0.4616793893129767, 0.5370914073204129, 1.0, 0.0029963615609610583, 0.8254019814844926, 0.0, 0.23688432926532732]
-// };
-// console.log(jsonData);
-// console.log(typeof(jsonData));
+
 var json = document.getElementById("json-data").textContent;
-// json = json.slice(1);
-// json = json.slice(0, -1);
-// console.log(json);
-json = JSON.stringify(json);
 var obj = JSON.parse(json);
 
-console.log(typeof(obj));
-
-json = JSON.stringify(json);
-var obj = JSON.parse(json);
 // console.log(obj);
+// console.log(typeof(obj));
+
 
 var topics = obj.topic;
 var topic1 = document.getElementById("topic1");
@@ -33,7 +24,7 @@ obj.score.forEach(function(value) {
 });
 // ダミーデータ
 var lineData = {
-    labels: [1, 2, 3, 4, 5, 6, 7],
+    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     datasets: [{
       label: '',
       data: scores,
