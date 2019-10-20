@@ -24,9 +24,9 @@
   >
     <a class="navbar-brand" href="#"
       ><img
-        src="../static/img/brand.gif"
+        src="../static/img/logo.gif"
         width="160px"
-        height="50px"
+        height="62px"
         class="d-inline-block align-top"
         alt="ブランド"
     /></a>
@@ -37,7 +37,7 @@
       <div class="jumbotron mt-4">
         <div class="bg-mask">
 
-        <h1 class="display-4"><font face="arial black">Let's ReCo!</font><br/>
+        <h1 class="display-4"><font face="Arial Rounded MT Bold">Let's ReCo!</font><br/>
           <!-- <a href="#"
             ><img
               src="../static/img/logo.gif"
@@ -47,30 +47,34 @@
               alt="ブランド"
           /></a> -->
         </h1>
-        <p class="lead">
+        <p class="lead"><font face="YuGothic">
           </br>
           会話データをアップロードし、自分のコミュニケーションを可視化させよう！</br>
-          会話のログを見て、自分のコミュニケーションスキルアップに活用してみてください</br>
+          会話のログを見て、自分のコミュニケーションスキルアップに活用してみてください。</br>
           対応ファイル形式は、.mp3と.wavです。</br>
+          </font>
         </p>
       </div>
     </div>
     </div>
-    <div class="container">
-    <h1><a href="#"
+     <div class="container">
+    <!-- <h1><a href="#"
     ><img
       src="../static/img/logo.gif"
       width="400px"
       height="150px"
       class="d-inline-block align-top"
       alt="ブランド"
-  /></a></h1>
+  /></a></h1> -->
         <hr class="my-4 bg-light" />
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-          <input type="file" name="audio" id="audio">
-          <input type="submit" value="アップロード" onclick="clicked()">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+        <form action="/upload" method="POST" enctype="multipart/form-data" >
+          <input type="file" name="audio" id="audio" class="button2">
+          <input type="submit" value="アップロード" onclick="clicked()" class="button">
         </form>
-      </div>
+        </div>
+    </div>
       <!-- /.jumbotron -->
       ...
     </div>
