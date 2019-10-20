@@ -29,8 +29,6 @@ var dominationData = {
 
 //データの取得
 
-// var data = document.getElementById("");
-
 var options = {
     scales: {
         yAxes: [

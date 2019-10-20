@@ -1,10 +1,33 @@
 
+var json = document.getElementById("json-data").textContent;
+var obj = JSON.parse(json);
+
+// console.log(obj);
+// console.log(typeof(obj));
+
+
+var topics = obj.topic;
+var topic1 = document.getElementById("topic1");
+topic1.textContent = topics[0];
+var topic2 = document.getElementById("topic2");
+topic2.textContent = topics[1];
+var topic3 = document.getElementById("topic3");
+topic3.textContent = topics[2];
+
+var scores = [];
+var domination = Math.round(obj.possesion['1'] * 100);
+var talk = Math.round(obj.active_rate * 100);
+
+
+obj.score.forEach(function(value) {
+  scores.push(Math.round(value * 100));
+});
 // ダミーデータ
 var lineData = {
-    labels: [1, 2, 3, 4, 5, 6, 7],
+    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     datasets: [{
       label: '',
-      data: [60, 77, 45, 88, 55, 49, 80],
+      data: scores,
       borderColor: '#E86560',
       fill: false,
       // backgroundColor: '#E86560',
@@ -14,7 +37,7 @@ var lineData = {
 var pieData = {
   labels: ['conversation','silence'],
   datasets: [{
-    data: [122, 53],
+    data: [talk, 100 - talk],
     backgroundColor: ['#E86560', '#0064b3']
   }]
 };
@@ -22,21 +45,10 @@ var pieData = {
 var dominationData = {
   labels: ['domination','Non-domination'],
   datasets: [{
-    data: [60,43],
+    data: [domination, 100 - domination],
     backgroundColor: ['#E86560', '#0064b3']
   }]
 };
-
-//データの取得
-
-/*
- var inputData = document.getElementById("");
- var obj = JSON.parse(inputData);
- var posession = obj.posession;
- var topic = obj.topic;
- var active_percent = obj.active_percent;
- var scores = obj.score
-*/
 
 var lineOptions = {
     scales: {
