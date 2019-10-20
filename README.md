@@ -5,7 +5,7 @@
 [![ReCo](image.png)](https://www.youtube.com/embed/IUudbtRc7Sk)
 
 ## 製品概要
-### 会話 Tech
+### 会話 × Tech
 
 ### 背景（製品開発のきっかけ、課題等）
 人とコミュニケーションを取ったとき「うまくいったorうまくいかなかった」と漠然と思い返すことが多々ある
