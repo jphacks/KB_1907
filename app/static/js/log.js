@@ -18,15 +18,16 @@ var talk = Math.round(obj.active_rate * 100);
 obj.score.forEach(function(value) {
   scores.push(Math.round(value * 100));
 });
-// ダミーデータ
+
+
 var lineData = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    labels: [...Array(scores.length).keys()],
     datasets: [{
       label: '',
       data: scores,
       borderColor: '#E86560',
       fill: false,
-      // backgroundColor: '#E86560',
+
     }]
   };
 
@@ -64,7 +65,6 @@ var lineOptions = {
                 fontColor: "#d0d2ff"
             },
             gridLines: {
-              // color: "#d0d2ff"
               color: "#105E7F"
             }
         }
@@ -142,9 +142,6 @@ var domination = new Chart(domination, {
         },
         legend: {
           display: false
-          // fontColor: "#d0d2ff",
         }
     }
 });
-
-

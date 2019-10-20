@@ -28,8 +28,6 @@ obj.logs.forEach(function(value) {
   scores.push(Math.round(value.score * 100));
 });
 
-var array = [...Array(obj.logs.length).keys()];
-console.log(array);
 
 // ダミーデータ
 var lineData = {
@@ -49,8 +47,6 @@ var pieData = {
     backgroundColor: ['#E86560', '#0064b3']
   }]
 };
-
-
 
 //データの取得
 
