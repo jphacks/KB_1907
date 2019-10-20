@@ -11,7 +11,12 @@ var topic3 = document.getElementById("topic3");
 topic3.textContent = topics[2];
 
 var scores = [];
-var domination = Math.round(obj.possesion['1'] * 100);
+var domination;
+
+for (key in obj.possesion) {
+  domination = Math.floor(obj.possesion[key] * 100);
+}
+
 var talk = Math.round(obj.active_rate * 100);
 
 
