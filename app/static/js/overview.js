@@ -129,4 +129,13 @@ var domination = new Chart(domination, {
     }
 });
 
+document.getElementById('line').onclick = function(e) {
+  var activePoints = lineChart.getElementsAtEvent(e);
+    if (activePoints.length > 0) {
+      var clickedElementIndex = activePoints[0]['_index'] + 1;
+      console.log(clickedElementIndex);
+      window.location.href = '/log/' +  clickedElementIndex;
+    }
+  
+};
 
