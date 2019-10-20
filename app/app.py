@@ -14,7 +14,7 @@ ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一�
 UPLOAD_DIR = 'audio_logs'
 LOG_DIR = 'log'
 TOPICS_NUM = 5
-DEBUG_MODE = True
+DEBUG_MODE = False
 DEBUG_DATA_PATH = 'test_data/sound.json'
 
 app = Flask(__name__)

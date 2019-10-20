@@ -9,7 +9,8 @@ function clicked() {
     });
 
     circle.set(0.25);
-    
+    var content = document.getElementById("content");
+    content.style.display = "none";
 }
 
 
