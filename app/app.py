@@ -7,7 +7,6 @@ import datetime
 import os
 import re
 import collections
-from sklearn import preprocessing
 
 
 ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
@@ -154,10 +153,6 @@ def make_response_for_client(result):
             final_score.append(final)
         else:
             final_score.append(0)
-    """
-    final_score = preprocessing.minmax_scale(final_score)
-    final_score = final_score.tolist()
-    """
     weighted_final_score = []
     for score in final_score:
         weighted_final = score * weight
