@@ -175,7 +175,8 @@ def make_response_for_client(result):
         for token in t.tokenize(sentence_body):
             part_of_speech = token.part_of_speech.split(',')
             if part_of_speech[0] == "名詞" and part_of_speech[1] in ALLOWED_NOUN_KIND:
-                topic.append(token.surface)
+                if token.surface != '_' and token.surface != 'D':
+                    topic.append(token.surface)
 
     active_rate = 1 - (total_pause / total_time)
 
