@@ -21,7 +21,7 @@ obj.score.forEach(function(value) {
 
 
 var lineData = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    labels: [...Array(scores.length).keys()],
     datasets: [{
       label: '',
       data: scores,
@@ -145,5 +145,3 @@ var domination = new Chart(domination, {
         }
     }
 });
-
-

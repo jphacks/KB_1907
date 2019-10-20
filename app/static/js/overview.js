@@ -28,8 +28,6 @@ obj.logs.forEach(function(value) {
   scores.push(Math.round(value.score * 100));
 });
 
-var array = [...Array(obj.logs.length).keys()];
-console.log(array);
 
 // ダミーデータ
 var lineData = {
