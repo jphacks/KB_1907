@@ -15,6 +15,8 @@ ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一�
 UPLOAD_DIR = 'audio_logs'
 LOG_DIR = 'log'
 TOPICS_NUM = 5
+DEBUG_MODE = True
+DEBUG_DATA_PATH = 'test_data/sound.json'
 
 app = Flask(__name__)
 t = Tokenizer()
@@ -25,22 +27,27 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    audio = request.files['audio']
-    if audio.filename == '':
-        return redirect('/')
-
-    if allowed_file(audio.filename):
-        saveFileName = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.' + audio.filename.rsplit('.', 1)[1].lower()
-        audio_path = os.path.join(UPLOAD_DIR, saveFileName)
-        audio.save(audio_path)
-        result = post_audio_to_speech_to_textAPI(audio_path)
+    if DEBUG_MODE:
+        with open(DEBUG_DATA_PATH, 'r') as f:
+            result = json.load(f)
         response = make_response_for_client(result)
-        save_path, json_id = get_save_path_and_id()
-        with open(save_path, 'w') as f:
-            json.dump(response, f, ensure_ascii=False)
-        return redirect('/log/{json_id}'.format(json_id=json_id))
     else:
-        return redirect('/')
+        audio = request.files['audio']
+        if audio.filename == '':
+            return redirect('/')
+
+        if allowed_file(audio.filename):
+            saveFileName = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.' + audio.filename.rsplit('.', 1)[1].lower()
+            audio_path = os.path.join(UPLOAD_DIR, saveFileName)
+            audio.save(audio_path)
+            result = post_audio_to_speech_to_textAPI(audio_path)
+            response = make_response_for_client(result)
+        else:
+            return redirect('/')
+    save_path, json_id = get_save_path_and_id()
+    with open(save_path, 'w') as f:
+        json.dump(response, f, ensure_ascii=False)
+    return redirect('/log/{json_id}'.format(json_id=json_id))
 
 @app.route('/log/<log_id>')
 def log(log_id):
