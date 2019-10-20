@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>RECO result</title>
+    <title>RECO  LOG</title>
 
     <link
       rel="stylesheet"
@@ -24,7 +24,14 @@
     nav
     class="navbar navbar-expand-lg navbar-dark bg-dark"
   >
-    <a class="navbar-brand" href="#">RECO</a>
+    <a class="navbar-brand" href="#"
+      ><img
+        src="../static/img/logo.gif"
+        width="160px"
+        height="62px"
+        class="d-inline-block align-top"
+        alt="ブランド"
+    /></a>
   </nav>
   <body
     data-spy="scroll"
@@ -34,27 +41,25 @@
   >
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-sm-3 col-4" id="myScrollspy">
+        <nav class="col-sm-2 col-2" id="myScrollspy">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#section1">Chart</a>
+              <a class="nav-link active" href="#section1"><font face="Arial Rounded MT Bold">Chart</font></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#section2">Rate</a>
+              <a class="nav-link" href="#section2"><font face="Arial Rounded MT Bold">Rate</font></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#section3">Hot Topic</a>
+              <a class="nav-link" href="#section3"><font face="Arial Rounded MT Bold">Hot Topic</font></a>
             </li>
           </ul>
         </nav>
-
         <div class="col-sm-9 col-8">
           <div id="section1">
             <canvas id="line"></canvas>
             <div style=" width:300px; height:300px;"></div>
           </div>
         </div>
-
         <div class="col-sm-3 col-4"></div>
         <div class="col-4">
           <div id="section2">
@@ -74,10 +79,22 @@
         <div class="col-sm-2">
           <div id="section3">
             <div class="card-deck"></div>
-            <div class="card text-white bg-info mb-3">
-              <div class="card-header">Top Topic</div>
+            <div class="card text-white mb-3 bg-transparent border-info">
+              <div class="card-header bg-info border-info"><font color="#d0d2ff" face="Verdana">Top Topic:1</font></div>
               <div class="card-body">
-                <p id="topic1" class="card-text">arigato</p>
+                <p class="card-text"><font color="#d0d2ff" face="Verdana">Arigato</font></p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div id="section3">
+            <div class="card text-white mb-3 bg-transparent border-info">
+              <div class="card-header bg-info border-info"><font color="#d0d2ff" face="Verdana">Top Topic:2</font></div>
+              <div class="card-body">
+                <p class="card-text"><font color="#d0d2ff" face="Verdana">Nemui</font></p>
               </div>
             </div>
           </div>
@@ -85,25 +102,14 @@
 
         <div class="col-sm-2">
           <div id="section3">
-            <div class="card text-white bg-info mb-3">
-              <div class="card-header">Top Topic</div>
+            <div class="card text-white mb-3 bg-transparent border-info">
+              <div class="card-header bg-info border-info"><font color="#d0d2ff" face="Verdana">Top Topic:3</font></div>
               <div class="card-body">
-                <p id="topic2" class="card-text">nemui</p>
+                <p class="card-text"><font color="#d0d2ff" face="Verdana">Ohayo</font></p>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-sm-2">
-          <div id="section3">
-            <div class="card text-white bg-info mb-3">
-              <div class="card-header">Top Topic</div>
-              <div class="card-body">
-                <p id="topic3" class="card-text">nemui</p>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>
     <script type="application/json" id="json-data">{{ res|tojson|safe }}</script>
