@@ -19,6 +19,17 @@ body {
     height: 250px;
 
   }
+  .jumbotron {
+    background-image: url("../img/43081.jpg");
+    background-size: cover;
+    background-position: center 60%;
+  }
+.bg-mask{
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+
+}
+
 
 
 /* プログレスバー */
