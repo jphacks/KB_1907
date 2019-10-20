@@ -9,6 +9,7 @@ function clicked() {
     });
 
     circle.set(0.25);
+    
 }
 
 
