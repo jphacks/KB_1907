@@ -2,10 +2,6 @@
 var json = document.getElementById("json-data").textContent;
 var obj = JSON.parse(json);
 
-// console.log(obj);
-// console.log(typeof(obj));
-
-
 var topics = obj.topic;
 var topic1 = document.getElementById("topic1");
 topic1.textContent = topics[0];
