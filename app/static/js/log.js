@@ -40,7 +40,7 @@ var pieData = {
 };
 
 var dominationData = {
-  labels: ['domination','Non-domination'],
+  labels: ['Speaker A','Speaker B'],
   datasets: [{
     data: [domination, 100 - domination],
     backgroundColor: ['#E86560', '#0064b3']
@@ -81,7 +81,6 @@ var lineOptions = {
             fontColor: "#d0d2ff"
           },
           gridLines: {
-            // color: "#d0d2ff"
             color: "#105E7F"
           }
         }
@@ -137,7 +136,7 @@ var domination = new Chart(domination, {
         title : {
           display: true,
           fontSize: 20,
-          text: "Domination Rate",
+          text: "Speaker Rate",
           fontColor: "#d0d2ff"
         },
         legend: {
