@@ -185,6 +185,8 @@ def make_response_for_client(result):
     response["possesion"] = posession_per_speaker
     response["active_rate"] = active_rate
     response["score"] = weighted_final_score
+    response["total_time"] = total_time
+    response["created_at"] = datetime.datetime.now().isoformat()
 
     return response
 
@@ -199,32 +201,31 @@ def get_overview():
     log_names = [x[1] for x in tmp_array]
 
     overview = {}
+    overview["logs"] = []
     topics = []
     top_topics = []
-    active_rates = []
-    scores = []
 
     for log_name in log_names:
         log_name = os.path.join(LOG_DIR, log_name)
         with open(log_name, 'r') as f:
             log = json.load(f)
         topics.extend(log["topic"])
-        active_rates.append(log["active_rate"])
+        log_obj = {}
+        log_obj["active_rate"] = log["active_rate"]
         data = log["score"]
         s = sum(data)
         N = len(data)
         mean_score = s / N
-        scores.append(mean_score)
+        log_obj["score"] = mean_score
+        log_obj["created_at"] = log["created_at"]
+        overview["logs"].append(log_obj)
     c = collections.Counter(topics)
     for i in range(TOPICS_NUM):
         if i < len(c.most_common()):
             top_topics.append(c.most_common()[i][0])
         else:
             break
-
     overview["topics"] = top_topics
-    overview["active_rates"] = active_rates
-    overview["scores"] = scores
     return overview
 
 if __name__ == "__main__":
