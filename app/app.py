@@ -46,7 +46,7 @@ def upload():
             return redirect('/')
     save_path, json_id = get_save_path_and_id()
     with open(save_path, 'w') as f:
-        json.dump(response, f, ensure_ascii=False, )
+        json.dump(response, f, ensure_ascii=False)
     return redirect('/log/{json_id}'.format(json_id=json_id))
 
 @app.route('/log/<log_id>')
