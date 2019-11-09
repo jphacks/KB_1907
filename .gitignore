@@ -4,3 +4,4 @@ app/log
 app/.vscode
 nginx/log
 reco.pem
+.venv
