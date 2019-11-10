@@ -16,6 +16,6 @@ pipenv shell #これで仮想環境がactivateされる
 - 手順としては
   - `docker-compose up` した後に `uwsgi` コンテナに入る
   - `flask db init` （初回のみ)
-  - `flask migrate` (model定義を更新した時のみ)
-  - `flask upgrade` で `models/models.py` に定義したモデルに対応したテーブルが作成されるはず
-  - `flask downgrade` でロールバックもできる
+  - `flask db migrate` (model定義を更新した時のみ)
+  - `flask db upgrade` で `models/models.py` に定義したモデルに対応したテーブルが作成されるはず
+  - `flask db downgrade` でロールバックもできる
