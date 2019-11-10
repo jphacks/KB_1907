@@ -29,6 +29,26 @@ t = Tokenizer()
 def index():
     return render_template("index.html")
 
+@app.route('/login', methods=['GET'])
+def login_get():
+    return render_template("login.html")
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    return
+
+@app.route('/signup', methods=['GET'])
+def signup_get():
+    return render_template("signup.html")
+
+@app.route('/signup', methods=['POST'])
+def signup_post():
+    return
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    return
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if DEBUG_MODE:
