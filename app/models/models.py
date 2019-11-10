@@ -1,9 +1,7 @@
-from flask.ext.sqlalchemy import SQLAlchemy
+from database import db
 from sqlalchemy import Column, Integer, Unicode, DATETIME, JSON, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
-
-db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = "users"
@@ -17,16 +15,16 @@ class User(db.Model):
         self.password = password.title()
         self.registerd_at = registerd_at.title()
 
-class log(db.Model):
+class Log(db.Model):
     __tablename__ = "logs"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, nullable=False)
     topic = Column(JSON, nullable=False)
     posession = Column(JSON, nullable=False)
-    active_rate = Column(Integer(3), nullable=False)
+    active_rate = Column(Integer, nullable=False)
     score = Column(JSON, nullable=False)
-    total_time = Column(Integer(10), nullable=False)
-    created_at = = Column(DATETIME, default=datetime.now, nullable=False)
+    total_time = Column(Integer, nullable=False)
+    created_at = Column(DATETIME, default=datetime.now, nullable=False)
     
     def __init__(user_id, topic, posession, active_rate, score, total_time, created_at):
         self.user_id = user_id.title()

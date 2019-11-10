@@ -1,7 +1,9 @@
 app/audio_logs
 .DS_Store
+__pycache__
 app/log
 app/.vscode
 nginx/log
 reco.pem
 .venv
+mysql_data
