@@ -7,7 +7,8 @@ import datetime
 import os
 import re
 import collections
-
+from database import init_db
+import models
 
 ALLOWED_EXTENSIONS = ['mp3', 'flac', 'wav']
 ALLOWED_NOUN_KIND = ['サ変接続', '形容動詞語幹', '副詞可能', '一般', '固有名詞']
@@ -18,6 +19,10 @@ DEBUG_MODE = False
 DEBUG_DATA_PATH = 'test_data/sound.json'
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@172.24.0.2:3306/reco'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+init_db(app)
+
 t = Tokenizer()
 
 @app.route('/')
